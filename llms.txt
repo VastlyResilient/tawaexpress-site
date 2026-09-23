@@ -1,0 +1,12 @@
+# Tawa Express
+> Halal Indian fusion restaurant at 3945 Main St, Bridgeport, CT 06606. Fast-casual: Indian street
+> food, curries, biryanis, protein bowls, Indian tacos, 14-inch Indian fusion pizzas, Indo-Chinese,
+> breakfast (from 8 AM), lunch, dinner, weekend thalis. Vegan and gluten-free options. Founded by
+> Chef Jay. Tawa Catering serves 50 to 10,000 guests across Fairfield County CT with trays, packages,
+> full-service events and live tandoor stations. Phone (203) 290-4673, info@thetawa.com.
+## Pages
+- [Menu](https://thetawaexpress.com/menu/): full breakfast, lunch, dinner and thali menu
+- [Catering](https://thetawaexpress.com/catering/): packages, live stations, quote form
+- [About](https://thetawaexpress.com/about/): Chef Jay's story, what a tawa is, the halal promise
+- [Visit](https://thetawaexpress.com/visit/): address, hours, parking, ordering
+- [FAQ](https://thetawaexpress.com/faq/): halal certification, dietary options, catering answers
