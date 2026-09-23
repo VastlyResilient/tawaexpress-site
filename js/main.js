@@ -1,6 +1,6 @@
 /* Tawa Express motion system.
    Policy: the Pause-motion button is the ONLY off-switch and it persists.
-   prefers-reduced-motion calms (200ms opacity reveals, half-speed video) but never freezes video.
+   prefers-reduced-motion calms (200ms opacity reveals, hero photo still).
    Only transform and opacity animate. Prices, hours, phones and forms stay still. */
 (function () {
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -8,29 +8,6 @@
   var root = document.documentElement;
   root.classList.toggle("motion-off", motionOff);
 
-  function tryPlay(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-  var vids = [].slice.call(document.querySelectorAll("video"));
-
-  function applyMotion() {
-    vids.forEach(function (v) {
-      v.playbackRate = reduce ? 0.5 : 1;
-      if (motionOff) v.pause(); else tryPlay(v);
-    });
-  }
-
-  /* pause video offscreen (IntersectionObserver), never while on screen */
-  if ("IntersectionObserver" in window) {
-    vids.forEach(function (v) {
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting && !motionOff) tryPlay(v); else v.pause();
-        });
-      }, { threshold: 0.05 }).observe(v);
-    });
-  }
-  applyMotion();
-
-  /* pause-motion toggle */
   var btn = document.getElementById("motionToggle");
   function syncBtn() {
     if (!btn) return;
@@ -48,11 +25,9 @@
       localStorage.setItem("tawa-motion", motionOff ? "off" : "on");
       syncBtn();
       if (motionOff) forceIn();
-      applyMotion();
     });
   }
 
-  /* header solid after 80px */
   var header = document.querySelector("header.site");
   function onScroll() {
     if (header) header.classList.toggle("scrolled", window.scrollY > 80);
@@ -68,7 +43,6 @@
   if (!("IntersectionObserver" in window) || motionOff) { forceIn(); }
 
   if ("IntersectionObserver" in window && !motionOff) {
-    /* section reveals: observe the section/heading wrapper, never the hidden child */
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
@@ -84,7 +58,6 @@
     document.querySelectorAll(".rise").forEach(function (el) { io2.observe(el); });
   }
 
-  /* count-up for sourced numbers only, 1200ms ease-out, final value lives in HTML */
   var counters = document.querySelectorAll("[data-count]");
   function runCount(el) {
     var m = el.textContent.trim().match(/^([\d,.]+)(.*)$/);
